@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package student;
+
+option go_package = "./studentpb";
+
+service StudentService {
+  rpc GetStudent (StudentRequest) returns (StudentResponse);
+
+  // Task 1: เพิ่ม RPC method สำหรับดึงรายชื่อนักเรียนทั้งหมด
+  rpc ListStudents (Empty) returns (StudentListResponse);
+}
+
+// Task 1: เพิ่ม Message เปล่าสำหรับเรียก List
+message Empty {}
+
+// Task 1: เพิ่ม Message สำหรับตอบกลับรายการนักเรียน (ใช้ repeated)
+message StudentListResponse {
+  repeated StudentResponse student = 1;
+}
+
+message StudentRequest {
+  int32 id = 1;
+}
+
+message StudentResponse {
+  int32 id = 1;
+  string name = 2;
+  string major = 3;
+  string email = 4;
+  // Task 2: เพิ่มฟิลด์เบอร์โทรศัพท์
+  string phone = 5;
+}
